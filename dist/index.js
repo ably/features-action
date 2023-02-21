@@ -10807,7 +10807,6 @@ const resolveSource = (fileName) => path.resolve(__dirname, fileName);
 
 async function render() {
   const featuresSource = await fetch('https://github.com/ably/features/raw/main/sdk.yaml');
-  console.log(featuresSource);
 
   const sdkManifestObjects = new ManifestObjects(
     ['this'],
@@ -10817,7 +10816,7 @@ async function render() {
   console.log(`Feature List Version from ${sdkManifestObjects.objects.size} manifests: ${sdkManifestObjects.commonVersion}`);
 
   build(
-    resolveSource('sdk.yaml'),
+    featuresSource,
     sdkManifestObjects,
     'output',
   );
