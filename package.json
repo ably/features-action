@@ -1,6 +1,6 @@
 {
   "name": "@ably/features-action",
-  "version": "1.2.0",
+  "version": "1.0.0",
   "description": "GitHub Action to renders a features matrix from canonical feature list plus SDK manifest.",
   "scripts": {
     "lint": "eslint .",
