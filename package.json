@@ -1,0 +1,21 @@
+{
+  "name": "@ably/features-action",
+  "version": "1.2.0",
+  "description": "GitHub Action to renders a features matrix from canonical feature list plus SDK manifest.",
+  "scripts": {
+    "lint": "eslint .",
+    "package": "ncc build server.js -o dist --source-map --license licenses.txt",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "ably/features-action",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@ably/features-core": "1.2.0-alpha.4"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.36.1",
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  }
+}

@@ -1,0 +1,9 @@
+name: Features
+description: Collect conformed information on the workflow event context.
+author: Ably
+branding:
+  icon: check
+  color: green
+runs:
+  using: node16
+  main: dist/index.js
