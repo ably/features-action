@@ -1,5 +1,5 @@
 name: Features
-description: Collect conformed information on the workflow event context.
+description: Render a features compliance matrix.
 author: Ably
 branding:
   icon: check
