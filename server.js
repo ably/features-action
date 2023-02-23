@@ -1,13 +1,16 @@
+const core = require('@actions/core');
 const path = require('path');
 const https = require('node:https');
 const { build, ManifestObjects } = require('@ably/features-core/html-matrix-build');
 
 const resolveSource = (fileName) => path.resolve(__dirname, fileName);
+const outputPath = 'output';
 
 // Entry Point
 (async () => {
   try {
     await render();
+    inform();
   } catch (error) {
     console.error(error);
     process.exit(2);
@@ -27,8 +30,18 @@ async function render() {
   build(
     featuresSource,
     sdkManifestObjects,
-    'output',
+    outputPath,
   );
+}
+
+function inform() {
+  const emit = (key, value) => {
+    core.info(`${key}: ${value}`);
+    core.setOutput(key, value);
+  };
+
+  emit('matrix-path', outputPath);
+  emit('matrix-artifact-name', 'features');
 }
 
 /**

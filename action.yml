@@ -7,3 +7,15 @@ branding:
 runs:
   using: node16
   main: dist/index.js
+
+# Outputs are designed to be consumed by Ably's Action, workflow-downstream, uploading to S3 for presentation at `sdk.ably.com`.
+# See: https://github.com/ably/sdk-upload-action#usage
+outputs:
+  matrix-path:
+    description: |
+      The relative path to the rendered output folder.
+      Suitable to be passed to the `sourcePath` input of the ably/sdk-upload-action.
+  matrix-artifact-name:
+    description: |
+      The short label describing the contents of the rendered output folder.
+      Suitable to be passed to the `artifactName` input of the ably/sdk-upload-action.
