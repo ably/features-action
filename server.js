@@ -5,9 +5,6 @@ const { build, ManifestObjects } = require('@ably/features-core/html-matrix-buil
 const resolveSource = (fileName) => path.resolve(__dirname, fileName);
 
 // TODO single manifest from .ably/capabilities.yaml
-// TODO canonical from https://github.com/ably/features/raw/main/sdk.yaml :
-// - that URL gives 302 to https://raw.githubusercontent.com/ably/features/main/sdk.yaml
-// - next URL gives 200 with content-type: text/plain; charset=utf-8
 
 // Entry Point
 (async () => {
