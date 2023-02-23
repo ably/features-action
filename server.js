@@ -1,9 +1,7 @@
 const core = require('@actions/core');
-const path = require('path');
 const https = require('node:https');
 const { build, ManifestObjects } = require('@ably/features-core/html-matrix-build');
 
-const resolveSource = (fileName) => path.resolve(__dirname, fileName);
 const outputPath = 'output';
 
 // Entry Point
@@ -22,7 +20,7 @@ async function render() {
 
   const sdkManifestObjects = new ManifestObjects(
     ['this'],
-    new Map([['this', resolveSource('.ably/capabilities.yaml')]]),
+    new Map([['this', '.ably/capabilities.yaml']]),
   );
 
   console.log(`Feature List Version from ${sdkManifestObjects.objects.size} manifests: ${sdkManifestObjects.commonVersion}`);
