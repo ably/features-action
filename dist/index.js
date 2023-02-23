@@ -13544,11 +13544,9 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(2186);
-const path = __nccwpck_require__(1017);
 const https = __nccwpck_require__(2286);
 const { build, ManifestObjects } = __nccwpck_require__(5772);
 
-const resolveSource = (fileName) => path.resolve(__dirname, fileName);
 const outputPath = 'output';
 
 // Entry Point
@@ -13567,7 +13565,7 @@ async function render() {
 
   const sdkManifestObjects = new ManifestObjects(
     ['this'],
-    new Map([['this', resolveSource('.ably/capabilities.yaml')]]),
+    new Map([['this', '.ably/capabilities.yaml']]),
   );
 
   console.log(`Feature List Version from ${sdkManifestObjects.objects.size} manifests: ${sdkManifestObjects.commonVersion}`);
