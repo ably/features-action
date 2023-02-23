@@ -4,8 +4,6 @@ const { build, ManifestObjects } = require('@ably/features-core/html-matrix-buil
 
 const resolveSource = (fileName) => path.resolve(__dirname, fileName);
 
-// TODO single manifest from .ably/capabilities.yaml
-
 // Entry Point
 (async () => {
   try {
