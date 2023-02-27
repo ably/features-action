@@ -25,7 +25,7 @@ async function render() {
   const { commonVersion } = sdkManifestObjects;
   console.log(`Canonical Feature List Version: "${commonVersion}" (manifest count: ${sdkManifestObjects.objects.size})`);
 
-  const featuresSource = await fetch(`https://github.com/ably/features/raw/${commonVersion}/sdk.yaml`);
+  const featuresSource = await fetch(`https://github.com/ably/features/raw/v${commonVersion}/sdk.yaml`);
 
   build(
     featuresSource,
