@@ -124,11 +124,13 @@ class ManifestObjects {
  * @param {string} canonicalSource The YAML document containing the canonical feature list.
  * @param {ManifestObjects} sdkManifestObjects In memory, having passed initial structural validation and YAML parse.
  * @param {string} outputDirectoryPath The path to the directory to generate the HTML document to.
+ * @param {string} subTitle The sub-title to be used in tab title and H1. Has a default value which makes sense when viewing multiple SDK manifest columns.
  */
 const build = (
   canonicalSource,
   sdkManifestObjects,
   outputDirectoryPath,
+  subTitle = 'SDK Features Matrix',
 ) => {
   // Load YAML source up-front for the canonical features list.
   validateStructure(YAML.parseDocument(canonicalSource).contents);
@@ -165,6 +167,7 @@ const build = (
     generator,
     sdkManifestObjects.suffixes,
     levelCount,
+    subTitle,
   );
 
   /**
@@ -398,14 +401,14 @@ function renderTableHeaderRow(writer, maximumLevel, sdkManifestSuffixes) {
  * @param {MatrixGenerator} generator To be used to generate the matrix, where this implementation is the consumer.
  * @param {string[]} sdkManifestSuffixes In the order they're to be explored for each feature, same as supplied to the generator.
  * @param {number} levelCount The depth of the canonical features tree being rendered.
- * @param {string} subTitle The sub-title to be used in tab title and H1. Has a default value which makes sense when viewing multiple SDK manifest columns.
+ * @param {string} subTitle The sub-title to be used in tab title and H1.
  */
 const writeDocument = (
   outputFilePath,
   generator,
   sdkManifestSuffixes,
   levelCount,
-  subTitle = 'SDK Features Matrix',
+  subTitle,
 ) => {
   const documentWriter = new DocumentWriter(
     { title: `${subTitle} | ${title}` },
