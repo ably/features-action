@@ -1,7 +1,6 @@
 const core = require('@actions/core');
 const https = require('node:https');
 const { build, ManifestObjects } = require('@ably/features-core/html-matrix-build');
-const { stat } = require('node:fs');
 
 const outputPath = 'output';
 
