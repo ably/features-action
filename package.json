@@ -10,7 +10,7 @@
   "repository": "ably/features-action",
   "license": "Apache-2.0",
   "dependencies": {
-    "@ably/features-core": "1.2.0-alpha.6",
+    "@ably/features-core": "1.2.0",
     "@actions/core": "^1.10.0"
   },
   "devDependencies": {
