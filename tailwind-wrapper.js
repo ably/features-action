@@ -1,4 +1,5 @@
 const tailwind = require('tailwindcss');
+require('tailwindcss/plugin'); // for configJs, defined later on
 const autoprefixer = require('autoprefixer');
 const postcss = require('postcss');
 const fs = require('fs');
