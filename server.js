@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const https = require('node:https');
 const { build, ManifestObjects } = require('@ably/features-core/html-matrix-build');
+const { tailwindBuild } = require('./tailwind-wrapper');
 
 const outputPath = 'output';
 
@@ -30,6 +31,8 @@ async function render() {
     sdkManifestObjects,
     outputPath,
   );
+
+  await tailwindBuild();
 }
 
 function inform() {
