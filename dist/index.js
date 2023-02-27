@@ -4171,6 +4171,14 @@ module.exports = require("net");
 
 /***/ }),
 
+/***/ 7561:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:fs");
+
+/***/ }),
+
 /***/ 2286:
 /***/ ((module) => {
 
@@ -13617,6 +13625,7 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186);
 const https = __nccwpck_require__(2286);
 const { build, ManifestObjects } = __nccwpck_require__(5772);
+const { stat } = __nccwpck_require__(7561);
 
 const outputPath = 'output';
 
@@ -13638,7 +13647,7 @@ async function render() {
   );
 
   const { commonVersion } = sdkManifestObjects;
-  console.log(`Feature List Version from ${sdkManifestObjects.objects.size} manifests: ${commonVersion}`);
+  console.log(`Canonical Feature List Version: "${commonVersion}" (manifest count: ${sdkManifestObjects.objects.size})`);
 
   const featuresSource = await fetch(`https://github.com/ably/features/raw/${commonVersion}/sdk.yaml`);
 
@@ -13674,6 +13683,8 @@ async function fetch(url) {
       https.get(location, (response) => {
         const { statusCode } = response;
         const contentType = response.headers['content-type'];
+
+        console.log(`Fetch: ${statusCode} status code from ${location}`);
 
         if (statusCode === 302) {
           fetchOrFollowRedirect(response.headers.location, depth + 1);
