@@ -13632,14 +13632,15 @@ const outputPath = 'output';
 })();
 
 async function render() {
-  const featuresSource = await fetch('https://github.com/ably/features/raw/main/sdk.yaml');
-
   const sdkManifestObjects = new ManifestObjects(
     ['this'],
     new Map([['this', '.ably/capabilities.yaml']]),
   );
 
-  console.log(`Feature List Version from ${sdkManifestObjects.objects.size} manifests: ${sdkManifestObjects.commonVersion}`);
+  const { commonVersion } = sdkManifestObjects;
+  console.log(`Feature List Version from ${sdkManifestObjects.objects.size} manifests: ${commonVersion}`);
+
+  const featuresSource = await fetch(`https://github.com/ably/features/raw/${commonVersion}/sdk.yaml`);
 
   build(
     featuresSource,
