@@ -16,9 +16,15 @@ const outputPath = 'output';
 })();
 
 async function render() {
+  const repositoryName = process.env.GITHUB_REPOSITORY.split('/')[1];
+  const sdkRepositoryNamePrefix = 'ably-';
+  const sdkName = repositoryName.startsWith(sdkRepositoryNamePrefix)
+    ? repositoryName.substring(sdkRepositoryNamePrefix.length)
+    : repositoryName; // fallback when run in a repository where the name doesn't have our standard prefix
+
   const sdkManifestObjects = new ManifestObjects(
-    ['this'],
-    new Map([['this', '.ably/capabilities.yaml']]),
+    [sdkName],
+    new Map([[sdkName, '.ably/capabilities.yaml']]),
   );
 
   const { commonVersion } = sdkManifestObjects;
@@ -26,12 +32,7 @@ async function render() {
 
   const featuresSource = await fetch(`https://github.com/ably/features/raw/v${commonVersion}/sdk.yaml`);
 
-  const repositoryName = process.env.GITHUB_REPOSITORY.split('/')[1];
-  const sdkRepositoryNamePrefix = 'ably-';
-  const sdkName = repositoryName.startsWith(sdkRepositoryNamePrefix)
-    ? repositoryName.substring(sdkRepositoryNamePrefix.length)
-    : repositoryName;
-  const subTitle = `${sdkName} Features`;
+  const subTitle = `${sdkName} SDK Features`;
 
   build(
     featuresSource,
