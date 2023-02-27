@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const https = require('node:https');
 const { build, ManifestObjects } = require('@ably/features-core/html-matrix-build');
+const { stat } = require('node:fs');
 
 const outputPath = 'output';
 
@@ -22,7 +23,7 @@ async function render() {
   );
 
   const { commonVersion } = sdkManifestObjects;
-  console.log(`Feature List Version from ${sdkManifestObjects.objects.size} manifests: ${commonVersion}`);
+  console.log(`Canonical Feature List Version: "${commonVersion}" (manifest count: ${sdkManifestObjects.objects.size})`);
 
   const featuresSource = await fetch(`https://github.com/ably/features/raw/${commonVersion}/sdk.yaml`);
 
@@ -58,6 +59,8 @@ async function fetch(url) {
       https.get(location, (response) => {
         const { statusCode } = response;
         const contentType = response.headers['content-type'];
+
+        console.log(`Fetch: ${statusCode} status code from ${location}`);
 
         if (statusCode === 302) {
           fetchOrFollowRedirect(response.headers.location, depth + 1);
