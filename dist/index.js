@@ -57922,6 +57922,29 @@ const _default = {
 
 /***/ }),
 
+/***/ 61062:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+Object.defineProperty(exports, "default", ({
+    enumerable: true,
+    get: ()=>_default
+}));
+const _createPlugin = /*#__PURE__*/ _interopRequireDefault(__nccwpck_require__(68556));
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+        default: obj
+    };
+}
+const _default = _createPlugin.default;
+
+
+/***/ }),
+
 /***/ 65528:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
@@ -58217,6 +58240,44 @@ function _default(pluginConfig, plugins) {
     ];
     return pluginNames;
 }
+
+
+/***/ }),
+
+/***/ 68556:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+Object.defineProperty(exports, "default", ({
+    enumerable: true,
+    get: ()=>_default
+}));
+function createPlugin(plugin, config) {
+    return {
+        handler: plugin,
+        config
+    };
+}
+createPlugin.withOptions = function(pluginFunction, configFunction = ()=>({})) {
+    const optionsFunction = function(options) {
+        return {
+            __options: options,
+            handler: pluginFunction(options),
+            config: configFunction(options)
+        };
+    };
+    optionsFunction.__isOptionsFunction = true;
+    // Expose plugin dependencies so that `object-hash` returns a different
+    // value if anything here changes, to ensure a rebuild is triggered.
+    optionsFunction.__pluginFunction = pluginFunction;
+    optionsFunction.__configFunction = configFunction;
+    return optionsFunction;
+};
+const _default = createPlugin;
 
 
 /***/ }),
@@ -61216,6 +61277,15 @@ function isGlobby(str) {
 
 /***/ }),
 
+/***/ 25885:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+let createPlugin = __nccwpck_require__(61062)
+module.exports = (createPlugin.__esModule ? createPlugin : { default: createPlugin }).default
+
+
+/***/ }),
+
 /***/ 93088:
 /***/ ((module) => {
 
@@ -63443,6 +63513,7 @@ function extend() {
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const tailwind = __nccwpck_require__(17483);
+__nccwpck_require__(25885); // for configJs, defined later on
 const autoprefixer = __nccwpck_require__(1376);
 const postcss = __nccwpck_require__(77001);
 const fs = __nccwpck_require__(57147);
