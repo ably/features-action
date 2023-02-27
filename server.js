@@ -26,10 +26,18 @@ async function render() {
 
   const featuresSource = await fetch(`https://github.com/ably/features/raw/v${commonVersion}/sdk.yaml`);
 
+  const repositoryName = process.env.GITHUB_REPOSITORY.split('/')[1];
+  const sdkRepositoryNamePrefix = 'ably-';
+  const sdkName = repositoryName.startsWith(sdkRepositoryNamePrefix)
+    ? repositoryName.substring(sdkRepositoryNamePrefix.length)
+    : repositoryName;
+  const subTitle = `${sdkName} Features`;
+
   build(
     featuresSource,
     sdkManifestObjects,
     outputPath,
+    subTitle,
   );
 }
 
